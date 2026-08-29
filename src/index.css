@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  animation: marquee 25s linear infinite;
+}
+
+/* Pause the scrolling animation when a user hovers over a logo */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
