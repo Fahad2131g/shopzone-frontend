@@ -3,17 +3,16 @@ import { FiBox, FiShoppingBag, FiUsers, FiTrendingUp, FiArrowLeft, FiShield } fr
 
 export default function AdminLayout() {
   const location = useLocation();
-
   const navItems = [
     { label: 'Overview', path: '/admin', icon: FiTrendingUp },
-    { label: 'Products Catalog', path: '/admin/products', icon: FiBox },
-    { label: 'Orders & Shipping', path: '/admin/orders', icon: FiShoppingBag },
+    { label: 'Products', path: '/admin/products', icon: FiBox },
+    { label: 'Orders', path: '/admin/orders', icon: FiShoppingBag },
     { label: 'Users', path: '/admin/users', icon: FiUsers },
   ];
 
   return (
     <div className="min-h-screen flex bg-[#FAF9F5] text-stone-800">
-      {/* Sidebar */}
+      {/* Sidebar - Desktop only */}
       <aside className="w-64 bg-amber-950 text-amber-50 p-6 flex flex-col justify-between hidden md:flex border-r border-amber-900/40">
         <div className="space-y-8">
           <div>
@@ -22,7 +21,6 @@ export default function AdminLayout() {
             </div>
             <h2 className="text-xl font-black text-white tracking-tight">E-Commerce HQ</h2>
           </div>
-
           <nav className="space-y-1.5">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -44,7 +42,6 @@ export default function AdminLayout() {
             })}
           </nav>
         </div>
-
         <Link
           to="/"
           className="flex items-center gap-2 text-xs font-bold text-amber-300/80 hover:text-white transition-colors pt-6 border-t border-amber-900/60"
@@ -54,9 +51,29 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main Content Viewport */}
-      <main className="flex-1 p-6 md:p-10 overflow-y-auto">
+      <main className="flex-1 p-4 sm:p-6 md:p-10 overflow-y-auto pb-24 md:pb-10">
         <Outlet />
       </main>
+
+      {/* Mobile Bottom Tab Bar */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-amber-950 border-t border-amber-900/40 flex items-center justify-around px-2 py-2">
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          const isActive = location.pathname === item.path;
+          return (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all ${
+                isActive ? 'text-amber-400' : 'text-amber-200/60'
+              }`}
+            >
+              <Icon className="w-4 h-4" />
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
     </div>
   );
 }
