@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import type { RootState } from '../store/store';
-import { Package, Clock, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Package, Clock, CheckCircle2, Loader2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export interface OrderItemResponse {
@@ -29,7 +27,7 @@ export default function OrdersPage() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:8084/api/orders/my-orders', {
+               const response = await fetch(`${import.meta.env.VITE_ORDER_API_URL || 'http://localhost:8084'}/api/orders/my-orders`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',

@@ -18,9 +18,9 @@ export interface Order {
   items: OrderItem[];
 }
 
-const ORDER_BASE_URL = 'http://localhost:8084/api/orders';
+const ORDER_BASE_URL = `${import.meta.env.VITE_ORDER_API_URL || 'http://localhost:8084'}/api/orders`;
 
-// 🛒 Checkout (used by CartPage)
+// Checkout (used by CartPage)
 export const createOrderApi = async (items: {
   productId: string;
   productName: string;
@@ -31,7 +31,7 @@ export const createOrderApi = async (items: {
   return response.data;
 };
 
-// 🔒 Admin Endpoints
+// Admin Endpoints
 export const getAllOrdersApi = async (): Promise<Order[]> => {
   const response = await api.get(`${ORDER_BASE_URL}/admin/all`);
   return response.data;
@@ -53,7 +53,7 @@ export const deleteAllOrdersApi = async (): Promise<void> => {
   await api.delete(`${ORDER_BASE_URL}/admin/all`);
 };
 
-// 👤 User Endpoints
+// User Endpoints
 export const getMyOrdersApi = async (): Promise<Order[]> => {
   const response = await api.get(`${ORDER_BASE_URL}/my-orders`);
   return response.data;

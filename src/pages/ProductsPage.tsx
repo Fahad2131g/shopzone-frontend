@@ -32,7 +32,7 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const API_BASE = 'http://localhost:8083/api/products/public';
+    const API_BASE = `${import.meta.env.VITE_PRODUCT_API_URL || 'http://localhost:8083'}/api/products/public`;
 
   // Read ?category= from URL on load and whenever it changes (e.g. Navbar link clicked)
   useEffect(() => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
@@ -9,8 +8,6 @@ import {
   MessageSquare,
   PhoneCall,
   HelpCircle,
-  FileQuestion,
-  Search
 } from 'lucide-react';
 
 export function Footer() {

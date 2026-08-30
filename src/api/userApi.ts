@@ -7,7 +7,7 @@ export interface AdminUser {
   role: 'USER' | 'ADMIN';
 }
 
-const AUTH_BASE_URL = 'http://localhost:8081/api/auth';
+const AUTH_BASE_URL = `${import.meta.env.VITE_AUTH_API_URL || 'http://localhost:8081'}/api/auth`;
 
 export const getAllUsersApi = async (): Promise<AdminUser[]> => {
   const response = await api.get(`${AUTH_BASE_URL}/admin/users`);

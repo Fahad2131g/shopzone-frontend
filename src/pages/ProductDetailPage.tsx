@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast'
@@ -71,7 +71,7 @@ export default function ProductDetailPage() {
       originalPrice: null,
       rating: 4.9,
       reviews: 0,
-      image: product.imageUrl,
+      image: product.images?.[0] || product.imageUrl || 'https://placehold.co/300x300?text=No+Image',
     }
   }
 

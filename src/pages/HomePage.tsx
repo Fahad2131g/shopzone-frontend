@@ -54,12 +54,6 @@ const CATEGORIES = [
   { name: 'Accessories', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80', count: '210+ Products', slug: '/products?category=accessories' },
 ];
 
-const FEATURED_PRODUCTS = [
-  { id: '1', title: 'Wireless Noise-Canceling Headphones', price: 199.99, rating: 4.8, reviews: 124, image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80', tag: 'Best Seller' },
-  { id: '2', title: 'Minimalist Minimal Desk Watch', price: 149.00, rating: 4.9, reviews: 88, image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80', tag: 'New Arrival' },
-  { id: '3', title: 'Ergonomic Leather Chair', price: 289.50, rating: 4.7, reviews: 205, image: 'https://images.unsplash.com/photo-1580481072645-022f9a6d1290?w=500&q=80', tag: 'Sale' },
-  { id: '4', title: 'Pro Performance Running Shoes', price: 120.00, rating: 4.6, reviews: 67, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80', tag: 'Trending' },
-];
 
 // Hero Images
 const HERO_IMAGES = [
@@ -250,7 +244,6 @@ export function HomePage() {
 
   // 2. PASTE THEM HERE (right under products state):
   const displayBestSellers = products.filter((p) => p.isBestSeller);
-  const featuredProducts = products.filter((p) => p.isFeatured);
 
   const featuredScrollRef = useRef<HTMLDivElement>(null);
 
@@ -390,9 +383,6 @@ export function HomePage() {
     ? products.filter((p) => p.isFeatured) 
     : products;
 
-  const displayNewArrivals = products.filter((p) => p.isNewArrival).length > 0 
-    ? products.filter((p) => p.isNewArrival) 
-    : products;
 
   return (
     <div className="min-h-screen bg-white text-neutral-800 font-sans">
