@@ -27,6 +27,7 @@ import AdminUsers from './admin/AdminUsers';
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AssistantChat from './components/AssistantChat';
 
 // ScrollToTop component ensures navigating to a new page scrolls up to top
 function ScrollToTop() {
@@ -81,7 +82,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF9F5] text-stone-800">
       <ScrollToTop />
-      
+
       <Navbar
         cartCount={cartCount}
         user={user}
@@ -101,27 +102,27 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
 
           {/* Guest Only Routes */}
-          <Route 
-            path="/login" 
-            element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />} 
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/" replace /> : <LoginPage />}
           />
-          <Route 
-            path="/register" 
-            element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />} 
+          <Route
+            path="/register"
+            element={isAuthenticated ? <Navigate to="/" replace /> : <RegisterPage />}
           />
 
           {/* User Protected Routes */}
-          <Route 
-            path="/cart" 
-            element={isAuthenticated ? <CartPage /> : <Navigate to="/login" replace />} 
+          <Route
+            path="/cart"
+            element={isAuthenticated ? <CartPage /> : <Navigate to="/login" replace />}
           />
           <Route
             path="/wishlist"
             element={isAuthenticated ? <WishlistPage /> : <Navigate to="/login" replace />}
           />
-          <Route 
-            path="/orders" 
-            element={isAuthenticated ? <OrdersPage /> : <Navigate to="/login" replace />} 
+          <Route
+            path="/orders"
+            element={isAuthenticated ? <OrdersPage /> : <Navigate to="/login" replace />}
           />
 
           {/* Protected Admin Routes */}
@@ -145,6 +146,7 @@ function App() {
       </main>
 
       <Footer />
+      <AssistantChat />
     </div>
   );
 }
