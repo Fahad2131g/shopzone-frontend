@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Send, Sparkles } from 'lucide-react';
+import { MessageCircle, X, Send, Sparkles, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -16,11 +17,12 @@ const SUGGESTED_QUESTIONS = [
 ];
 
 export default function AssistantChat() {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      text: "Hi! I'm ShopZone's shopping assistant. Ask me about our products, or tap a suggestion below to get started.",
+      text: "Hi! I'm ShopZone's shopping assistant. Ask me about our products — for example:",
     },
   ]);
   const [input, setInput] = useState('');
@@ -76,6 +78,11 @@ export default function AssistantChat() {
     }
   };
 
+  const handleContactClick = () => {
+    setIsOpen(false);
+    navigate('/contact');
+  };
+
   const showSuggestions = messages.length === 1;
 
   return (
@@ -91,21 +98,30 @@ export default function AssistantChat() {
           >
             {/* Header */}
             <div className="bg-gradient-to-br from-amber-950 via-amber-900 to-stone-900 text-amber-50 px-5 py-4 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-amber-400/20 flex items-center justify-center">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-amber-400/20 flex items-center justify-center shrink-0">
                   <Sparkles className="w-4 h-4 text-amber-300" />
                 </div>
-                <div>
-                  <p className="text-sm font-black leading-tight">ShopZone Assistant</p>
+                <div className="min-w-0">
+                  <p className="text-sm font-black leading-tight truncate">ShopZone Assistant</p>
                   <p className="text-[10px] text-amber-300/70">Online &middot; Ask me anything</p>
                 </div>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="text-amber-200/70 hover:text-white transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  onClick={handleContactClick}
+                  title="Contact human support"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-amber-200/80 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-amber-200/80 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -152,13 +168,12 @@ export default function AssistantChat() {
               {showSuggestions && !loading && (
                 <div className="flex flex-col gap-2 pt-1">
                   {SUGGESTED_QUESTIONS.map((q) => (
-                    <button
+                    <div
                       key={q}
-                      onClick={() => sendMessage(q)}
-                      className="text-left text-[11px] font-semibold text-amber-900 bg-amber-50 border border-amber-200 rounded-xl px-3.5 py-2.5 hover:bg-amber-100 transition-colors"
+                      className="text-left text-[11px] font-semibold text-amber-900/70 bg-amber-50/70 border border-amber-200/70 rounded-xl px-3.5 py-2.5"
                     >
-                      {q}
-                    </button>
+                      &ldquo;{q}&rdquo;
+                    </div>
                   ))}
                 </div>
               )}

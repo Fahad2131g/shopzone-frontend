@@ -29,8 +29,15 @@ export default function ProductsPage() {
 
   const [products, setProducts] = useState<ProductResponse[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+    const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    const urlCategory = searchParams.get('category');
+    if (urlCategory) {
+      const matched = CATEGORIES.find((c) => c.toLowerCase() === urlCategory.toLowerCase());
+      return matched || 'All';
+    }
+    return 'All';
+  });
+    const [searchQuery, setSearchQuery] = useState<string>(() => searchParams.get('search') || '');
 
     const API_BASE = `${import.meta.env.VITE_PRODUCT_API_URL || 'http://localhost:8083'}/api/products/public`;
 
@@ -48,14 +55,6 @@ export default function ProductsPage() {
     }
   }, [searchParams]);
 
-  // Read ?search= from URL (e.g. from Navbar search bar) on load and whenever it changes
-useEffect(() => {
-  const urlSearch = searchParams.get('search');
-  if (urlSearch) {
-    setSearchQuery(urlSearch);
-    setSelectedCategory('All');
-  }
-}, [searchParams]);
 
   const fetchProducts = async () => {
     setLoading(true);

@@ -48,10 +48,10 @@ const BRANDS = [
 ];
 
 const CATEGORIES = [
-  { name: 'Electronics', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80', count: '120+ Products', slug: '/products?category=electronics' },
-  { name: 'Apparel', image: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=500&q=80', count: '350+ Products', slug: '/products?category=apparel' },
-  { name: 'Footwear', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80', count: '90+ Products', slug: '/products?category=shoes' },
-  { name: 'Accessories', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80', count: '210+ Products', slug: '/products?category=accessories' },
+  { name: 'Electronics', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80', count: '120+ Products', slug: '/products?category=Electronics' },
+  { name: 'Home & Living', image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80', count: '350+ Products', slug: '/products?category=' + encodeURIComponent('Home & Living') },
+  { name: 'Footwear', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80', count: '90+ Products', slug: '/products?category=Footwear' },
+  { name: 'Accessories', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80', count: '210+ Products', slug: '/products?category=Accessories' },
 ];
 
 
